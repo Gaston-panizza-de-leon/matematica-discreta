@@ -244,19 +244,17 @@ class Entrega {
        * tant `a` com cada un dels elements de `p` està ordenat de menor a major.
        */
       static boolean exercici1(int[] a, int[][] p) {
+          Integer[] aInt = new Integer[a.length];
+          Arrays.setAll(aInt, k -> a[k]);
+          List<Integer> aList = Arrays.asList(aInt);
+          List<Integer> conjunt = new ArrayList<>();
           for (int i=0; i<p.length; i++) {
-
-              Integer[] aInt = new Integer[a.length];
-              Arrays.setAll(aInt, k -> a[k]);
-              List<Integer> aList = Arrays.asList(aInt);
-              List<int[]> conjunt = Arrays.asList(p[i]);
-
-              for (int j=0; j<conjunt.size(); j++) {
-                  int auxp = p[i][j];
-                  if (!aList.contains(auxp)) {
-                      return false;
-                  }
+              for (int j=0; j<p[i].length; j++) {
+                  conjunt.add(p[i][j]);
               }
+          }
+          if (!conjunt.containsAll(aList)){
+              return false;
           }
           return true;
       }
