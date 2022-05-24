@@ -58,9 +58,17 @@ class Entrega {
         BiPredicate<Integer, Integer> p,
         Predicate<Integer> q,
         Predicate<Integer> r) {
-
-      return false; // TO DO
-    }
+          for (int i = 0; i < universe.length; i++) {
+              for (int j = 0; j < universe.length; j++) {
+                  boolean a = p.test(universe[i], universe[j]);
+                  boolean b = q.test(universe[i])&&r.test(universe[j]);
+                  if (a && !b) {
+                      return false;
+                  }
+              }
+          }
+          return true; // TO DO
+      }
 
     /*
      * És cert que ∃!x. ∀y. Q(y) -> P(x) ?
