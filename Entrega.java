@@ -74,7 +74,22 @@ class Entrega {
      * És cert que ∃!x. ∀y. Q(y) -> P(x) ?
      */
     static boolean exercici2(int[] universe, Predicate<Integer> p, Predicate<Integer> q) {
-      return false; // TO DO
+       int count = 0;
+          int x = 0;
+          for (int i = 0; i < universe.length; i++) {
+              for (int j = 0; j < universe.length; j++) {
+                  if (!(q.test(universe[j]) && !p.test(universe[i]))) {
+                      if (count == 0) {
+                          x = i;
+                          count++;
+                      }
+                      if (x != i) {
+                          count++;
+                      }
+                  }
+              }
+          }
+          return count == 1; // TO DO
     }
 
     /*
@@ -91,7 +106,28 @@ class Entrega {
      * És cert que ∀x. ∃!y. x·y ≡ 1 (mod n) ?
      */
     static boolean exercici4(int[] universe, int n) {
-      return false; // TO DO
+       int x,y;
+        int count = 0;
+        for (int i = 0; i < universe.length; i++) {
+            for (int j = 0; j < universe.length; j++) {
+                x = universe[i];
+                y = universe[j];
+                if ((x*y)%n==1) {
+                    if (count == 0) {
+                          y = i;
+                          count++;
+                      }
+                      if (y != i) {
+                          return false;
+                      }
+                }
+            }
+            if (count!=1) {
+               return false;
+            }  
+            count = 0;
+        }
+      return true; // TO DO
     }
 
     /*
