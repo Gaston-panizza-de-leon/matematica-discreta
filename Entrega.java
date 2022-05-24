@@ -26,8 +26,8 @@ import java.util.Set;
  *
  * Podeu fer aquesta entrega en grups de com a mÃ xim 3 persones, i necessitareu com a minim Java 8.
  * Per entregar, posau a continuaciÃ³ els vostres noms i entregau Ãºnicament aquest fitxer.
- * - Nom 1:
- * - Nom 2:
+ * - Nom 1: Lucas Gastón Panizza De León
+ * - Nom 2: Andreu Valerià
  * - Nom 3:
  *
  * L'entrega es farÃ  a travÃ©s d'una tasca a l'Aula Digital abans de la data que se us hagui
