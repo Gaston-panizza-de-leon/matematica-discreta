@@ -99,6 +99,21 @@ class Entrega {
      * que cada un d'ells està ordenat de menor a major.
      */
     static boolean exercici3(int[][] universe) {
+//         int [] a;
+//        int [] b;  
+//        boolean contiene;
+//        boolean finLinea;
+//        for (int i = 0; i < universe.length; i++) {
+//            for (int j = 0; j < universe.length; j++) {
+//                a = universe[i];
+//                b = universe[j];
+//                for (int k = 0; k < a.length; k++) {
+//                    for (int l = 0; l < b.length; l++) {
+//                     
+//                    }
+//                    }
+//                }
+//            }
       return false; // TO DO
     }
 
