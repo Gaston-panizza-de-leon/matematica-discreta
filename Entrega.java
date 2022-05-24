@@ -1,6 +1,7 @@
 import java.lang.AssertionError;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.function.BiPredicate;
 import java.util.function.Function;
 import java.util.function.IntPredicate;
@@ -26,8 +27,8 @@ import java.util.Set;
  *
  * Podeu fer aquesta entrega en grups de com a màxim 3 persones, i necessitareu com a minim Java 8.
  * Per entregar, posau a continuació els vostres noms i entregau únicament aquest fitxer.
- * - Nom 1: Lucas Gast�n Panizza De Le�n
- * - Nom 2: Andreu Valeri�
+ * - Nom 1: Lucas Gast�n Panizza De Le�n
+ * - Nom 2: Andreu Valeri�
  * - Nom 3:
  *
  * L'entrega es farà a través d'una tasca a l'Aula Digital abans de la data que se us hagui
@@ -236,24 +237,46 @@ class Entrega {
    * x és un enter d'a i el resultat f.apply(x) és un enter de b).
    */
   static class Tema2 {
-    /*
-     * És `p` una partició d'`a`?
-     *
-     * `p` és un array de conjunts, haureu de comprovar que siguin elements d'`a`. Podeu suposar que
-     * tant `a` com cada un dels elements de `p` està ordenat de menor a major.
-     */
-    static boolean exercici1(int[] a, int[][] p) {
-      return false; // TO DO
-    }
+      /*
+       * És `p` una partició d'`a`?
+       *
+       * `p` és un array de conjunts, haureu de comprovar que siguin elements d'`a`. Podeu suposar que
+       * tant `a` com cada un dels elements de `p` està ordenat de menor a major.
+       */
+      static boolean exercici1(int[] a, int[][] p) {
+          for (int i=0; i<p.length; i++) {
 
-    /*
-     * Comprovau si la relació `rel` definida sobre `a` és un ordre parcial i que `x` n'és el mínim.
-     *
-     * Podeu soposar que `x` pertany a `a` i que `a` està ordenat de menor a major.
-     */
-    static boolean exercici2(int[] a, int[][] rel, int x) {
-      return false; // TO DO
-    }
+              Integer[] aInt = new Integer[a.length];
+              Arrays.setAll(aInt, k -> a[k]);
+              List<Integer> aList = Arrays.asList(aInt);
+              List<int[]> conjunt = Arrays.asList(p[i]);
+
+              for (int j=0; j<conjunt.size(); j++) {
+                  int auxp = p[i][j];
+                  if (!aList.contains(auxp)) {
+                      return false;
+                  }
+              }
+          }
+          return true;
+      }
+      /*
+       * Comprovau si la relació `rel` definida sobre `a` és un ordre parcial i que `x` n'és el mínim.
+       *
+       * Podeu soposar que `x` pertany a `a` i que `a` està ordenat de menor a major.
+       */
+      static boolean exercici2(int[] a, int[][] rel, int x) {
+          boolean result = true;
+          for (int i = 0; i < rel.length; i++) {
+              if (rel[i][0] == x) {
+                  result = false;
+              }
+              if (rel[i][1] == x) {
+                  result = true;
+              }
+          }
+          return result;
+      }
 
     /*
      * Suposau que `f` és una funció amb domini `dom` i codomini `codom`.  Trobau l'antiimatge de
