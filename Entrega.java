@@ -99,24 +99,43 @@ class Entrega {
      * que cada un d'ells està ordenat de menor a major.
      */
     static boolean exercici3(int[][] universe) {
-//         int [] a;
-//        int [] b;  
-//        boolean contiene;
-//        boolean finLinea;
-//        for (int i = 0; i < universe.length; i++) {
-//            for (int j = 0; j < universe.length; j++) {
-//                a = universe[i];
-//                b = universe[j];
-//                for (int k = 0; k < a.length; k++) {
-//                    for (int l = 0; l < b.length; l++) {
-//                     
-//                    }
-//                    }
-//                }
-//            }
-      return false; // TO DO
+        int [] x;
+        int [] y;  
+        boolean contiene;
+        for (int i = 0; i < universe.length; i++) {
+            contiene = true;
+            x = universe[i];
+            for (int j = 0; j < universe.length; j++) {
+                y = universe[j];  
+                if(!contiene(x,y)){
+                    contiene = false;
+                    break;
+                }
+                }
+            if(contiene){
+                return false;
+            }
+            }
+      return true; // TO DO
     }
-
+    static boolean contiene(int [] x, int [] y){
+        boolean contiene;
+        if(y.length>x.length){
+            return false;
+        }
+        for (int i = 0; i < y.length; i++) {
+            contiene = false;
+            for (int j = 0; j < x.length; j++) {
+                if(y[i]==x[j]){
+                   contiene = true; 
+                }
+            }
+            if(!contiene){
+                return false;
+            }
+        }
+        return true;
+    }
     /*
      * És cert que ∀x. ∃!y. x·y ≡ 1 (mod n) ?
      */
