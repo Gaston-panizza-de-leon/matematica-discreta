@@ -461,7 +461,23 @@ class Entrega {
      * Podeu suposar que `a` i `b` són positius.
      */
     static int exercici1(int a, int b) {
-      return -1; // TO DO
+       int rest;
+      if(a>b){
+          rest = a%b;
+          if (rest == 0) {
+            return b;
+        }else{
+            return exercici1(b, rest);
+        }
+      }else{
+          rest = b%a;
+          if (rest == 0) {
+            return a;
+        }else{  
+            return exercici1(a, rest);
+            }
+        }       
+        // TO DO
     }
 
     /*
