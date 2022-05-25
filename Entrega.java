@@ -486,7 +486,7 @@ class Entrega {
      * Podeu suposar que `a`, `b` i `c` són positius.
      */
     static boolean exercici2(int a, int b, int c) {
-      return false; // TO DO
+      return exercici1(a, b) % c == 0;
     }
 
     /*
