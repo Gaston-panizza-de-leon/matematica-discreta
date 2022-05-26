@@ -255,6 +255,7 @@ class Entrega {
    * int[] b, i un objecte de tipus Function<Integer, Integer> que podeu avaluar com f.apply(x) (on
    * x és un enter d'a i el resultat f.apply(x) és un enter de b).
    */
+    
   static class Tema2 {
       /*
        * És `p` una partició d'`a`?
@@ -283,45 +284,178 @@ class Entrega {
        * Podeu soposar que `x` pertany a `a` i que `a` està ordenat de menor a major.
        */
       static boolean exercici2(int[] a, int[][] rel, int x) {
-          boolean result = true;
-          for (int i = 0; i < rel.length; i++) {
-              if (rel[i][0] == x) {
-                  result = false;
-              }
-              if (rel[i][1] == x) {
-                  result = true;
+          boolean reflexive = false;
+          boolean antisimetric = false;
+          boolean transitive = false;
+          boolean Xminimo = false;
+          int counter = 0;
+
+          //Comprovar si la relación es reflexiva
+          for (int i=0; i<rel.length; i++) {
+              if (rel[i][0] == rel[i][1]) {
+                  counter++;
               }
           }
-          return result;
+          if (counter == a.length) {
+              reflexive = true;
+          }
+
+          counter = 0;
+          //Comprovar si la relación es antisimétrica
+          for (int i=0; i<rel.length; i++) {
+              for (int j = 0; j < rel.length; j++) {
+                  if (rel[i][0] == rel[j][1] && rel[i][1] == rel[j][0] && rel[i][0] == rel[j][0] && rel[i][1] == rel[j][1]) {
+                      counter++;
+                  }
+              }
+          }
+          if (counter == a.length) {
+              antisimetric = true;
+          }
+
+          counter = 0;
+          //Comprovar si la relación es transitiva
+          for (int i=0; i<rel.length; i++) {
+              for (int j=0; j<rel.length; j++) {
+                  for (int k=0; k<rel.length; k++) {
+                      if (rel[i][1] == rel[j][0] && rel[j][1] == rel[k][0] && rel[i][0] == rel[k][1]) {
+                          counter++;
+                      }
+                  }
+              }
+          }
+
+          if (counter == a.length) {
+              transitive = true;
+          }
+
+          //Comprobar si x es el mínimo de la relación
+          int minimals = 0;
+          int minimumRel = 0;
+          int minimum = 0;
+          for (int i=0; i<a.length; i++) {
+              int relcounter = 0;
+              for (int j=0; j<rel.length; j++) {
+                  if (rel[j][0] == a[i]) {
+                      relcounter++;
+                  }
+              }
+              if (minimumRel == 0 || relcounter < minimumRel) {
+                  minimumRel = relcounter;
+                  minimals = 0;
+                  minimum  = a[i];
+              } else if (relcounter == minimumRel) {
+                  minimals++;
+              }
+          }
+
+          if (minimum == x) {
+              Xminimo = true;
+          }
+
+          if (reflexive && antisimetric && transitive && Xminimo) {
+              return true;
+          }
+          return false;
       }
 
-    /*
-     * Suposau que `f` és una funció amb domini `dom` i codomini `codom`.  Trobau l'antiimatge de
-     * `y` (ordenau el resultat de menor a major, podeu utilitzar `Arrays.sort()`). Podeu suposar
-     * que `y` pertany a `codom` i que tant `dom` com `codom` també estàn ordenats de menor a major.
-     */
-    static int[] exercici3(int[] dom, int[] codom, Function<Integer, Integer> f, int y) {
-      return new int[]{}; // TO DO
-    }
+      /*
+       * Suposau que `f` és una funció amb domini `dom` i codomini `codom`.  Trobau l'antiimatge de
+       * `y` (ordenau el resultat de menor a major, podeu utilitzar `Arrays.sort()`). Podeu suposar
+       * que `y` pertany a `codom` i que tant `dom` com `codom` també estàn ordenats de menor a major.
+       */
+      static int[] exercici3(int[] dom, int[] codom, Function<Integer, Integer> f, int y) {
+          List<Integer> antiimagenes = new ArrayList<>();
+          for (int i=0; i<dom.length; i++) {
+              if (f.apply(dom[i]) == y) {
+                  antiimagenes.add(dom[i]);
+              }
+          }
+          System.out.println(antiimagenes);
 
-    /*
-     * Suposau que `f` és una funció amb domini `dom` i codomini `codom`.  Retornau:
-     * - 3 si `f` és bijectiva
-     * - 2 si `f` només és exhaustiva
-     * - 1 si `f` només és injectiva
-     * - 0 en qualsevol altre cas
-     *
-     * Podeu suposar que `dom` i `codom` estàn ordenats de menor a major. Per comoditat, podeu
-     * utilitzar les constants definides a continuació:
-     */
-    static final int NOTHING_SPECIAL = 0;
-    static final int INJECTIVE = 1;
-    static final int SURJECTIVE = 2;
-    static final int BIJECTIVE = INJECTIVE + SURJECTIVE;
+          int[] arr = new int[antiimagenes.size()];
 
-    static int exercici4(int[] dom, int[] codom, Function<Integer, Integer> f) {
-      return -1; // TO DO
-    }
+          // ArrayList to Array Conversion
+          for (int i = 0; i < antiimagenes.size(); i++)
+              arr[i] = antiimagenes.get(i);
+
+          return arr;
+      }
+
+      /*
+       * Suposau que `f` és una funció amb domini `dom` i codomini `codom`.  Retornau:
+       * - 3 si `f` és bijectiva
+       * - 2 si `f` només és exhaustiva
+       * - 1 si `f` només és injectiva
+       * - 0 en qualsevol altre cas
+       *
+       * Podeu suposar que `dom` i `codom` estàn ordenats de menor a major. Per comoditat, podeu
+       * utilitzar les constants definides a continuació:
+       */
+      static final int NOTHING_SPECIAL = 0;
+      static final int INJECTIVE = 1;
+      static final int SURJECTIVE = 2;
+      static final int BIJECTIVE = INJECTIVE + SURJECTIVE;
+      static int exercici4(int[] dom, int[] codom, Function<Integer, Integer> f) {
+          boolean injective;
+          int tipo1 = 1;
+          int[] function = new int[dom.length];
+          if (dom.length < codom.length) {
+              for (int i = 0; i < dom.length; i++) {
+                  function[i] = f.apply(dom[i]);
+              }
+              int checkrepeat = 0;
+              for (int i : function) {
+                  injective = false;
+                  for (int x : codom) {
+                      if (i == x) {
+                          injective = true;
+                          checkrepeat++;
+                          break;
+                      }
+                  }
+                  if (injective == false) {
+                      tipo1 = 0;
+                      break;
+                  }
+              }
+              if (tipo1 == 1 && checkrepeat == dom.length) {
+                  return INJECTIVE;
+              } else {
+                  return NOTHING_SPECIAL;
+              }
+
+          } else if (dom.length > codom.length) {
+              for (int i : dom) {
+                  injective = false;
+                  for (int x : codom) {
+                      if (f.apply(i) == x) {
+                          injective = true;
+                          break;
+                      }
+                  }
+                  if (injective == false) {
+                      tipo1 = 0;
+                      break;
+                  }
+              }
+              if (tipo1 == 1) {
+                  return SURJECTIVE;
+              } else {
+                  return NOTHING_SPECIAL;
+              }
+          } else {
+              for (int i = 0; i < dom.length; i++) {
+                  function[i] = f.apply(dom[i]);
+              }
+              Arrays.sort(function);
+              if (Arrays.equals(function, codom)) {
+                  return BIJECTIVE;
+              } else {
+                  return NOTHING_SPECIAL;
+              }
+          }
+      }
 
     /*
      * Aquí teniu alguns exemples i proves relacionades amb aquests exercicis (vegeu `main`)
