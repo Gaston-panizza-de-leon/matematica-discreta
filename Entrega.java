@@ -371,7 +371,6 @@ class Entrega {
                   antiimagenes.add(dom[i]);
               }
           }
-          System.out.println(antiimagenes);
 
           int[] arr = new int[antiimagenes.size()];
 
@@ -620,7 +619,7 @@ class Entrega {
      * Podeu suposar que `a`, `b` i `c` són positius.
      */
     static boolean exercici2(int a, int b, int c) {
-      return exercici1(a, b) % c == 0;
+        return exercici1(a, b) % c == 0;
     }
 
     /*
@@ -629,7 +628,20 @@ class Entrega {
      * Retornau l'invers sempre entre 1 i `n-1`, en cas que no existeixi retornau -1
      */
     static int exercici3(int a, int n) {
-      return -1; // TO DO
+        //calcula el inverso de a mod n
+        boolean ExisteixInvers = false;
+        int inverso = 0;
+        for (int i = 1; i < n; i++) {
+            if ((a * i) % n == 1) {
+                inverso = i;
+                ExisteixInvers = true;
+                break;
+            }
+        }
+
+        if (ExisteixInvers) {
+            return inverso;
+        } else return -1;
     }
 
     /*
