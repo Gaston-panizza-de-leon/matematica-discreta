@@ -725,14 +725,28 @@ class Entrega {
          *
          */
         static int exercici3(int n, int d) {
-            //dado n el numero de fulles de un arbol y d el numero de hijos de los nodos interiores
-            //devuelve el numero total de vertices del arbol
+            //dado n el numero de fulles de un arbol y d el numero de hijos de los nodos interiores devuelve el numero total de vertices del arbol
             int total = 0;
-            for (int i = 0; i < n; i++) {
-                total += (i + 1) * (d + 1);
+            double niveli = 0;
+            int i;
+            for (i = 0; niveli<=n; i++) {
+                total += (int)niveli;
+                niveli = Math.pow(d, i);
             }
-            return total;
+            if(Math.pow(d, i - 2) != n) {
+                double fullesNiveli = Math.pow(d, i - 2) - 1;
+                int nfullesSeg = 0;
+                while ((nfullesSeg + fullesNiveli) < n) {
+                    nfullesSeg += d;
+                    if ((nfullesSeg + fullesNiveli) < n) {
+                        fullesNiveli--;
+                    }
+                }
+                total = total + nfullesSeg;
+                return total;
+            }else return total;
         }
+
         /*
          * Donada una matriu d'adjacencia `A` d'un graf connex no dirigit, digau si el graf conté algún cicle.
          */
