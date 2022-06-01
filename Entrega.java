@@ -680,14 +680,43 @@ class Entrega {
          * Donada una matriu d'adjacencia `A` d'un graf no dirigit, retornau l'ordre i la mida del graf.
          */
         static int[] exercici1(int[][] A) {
-            return new int[]{}; // TO DO
+            //Dada una matriz de adyacencia A, devuelve el orden y el tamaño del grafo
+            int orden = A.length;
+            int mida = 0;
+            for (int i = 0; i < orden; i++) {
+                for (int j = 0; j < orden; j++) {
+                    if (A[i][j] == 1 && A[j][i] == 1) {
+                        mida++;
+                    }
+                }
+            }
+            mida = mida / 2;
+            return new int[]{orden, mida};
+
         }
 
         /*
          * Donada una matriu d'adjacencia `A` d'un graf no dirigit, digau si el graf es eulerià.
          */
         static boolean exercici2(int[][] A) {
-            return false; // TO DO
+            //dada una matriz de adyacencia A, devuelve si el grafo es euleriano
+            boolean euleriano = true;
+            int orden = A.length;
+            int mida = 0;
+            int[] grado = new int[orden];
+            for (int i = 0; i < orden; i++) {
+                for (int j = 0; j < orden; j++) {
+                    if (A[i][j] == 1) {
+                        grado[i]++;
+                    }
+                }
+            }
+            for (int i = 0; i < grado.length; i++) {
+                if (grado[i] % 2 != 0) {
+                    euleriano = false;
+                }
+            }
+            return euleriano;
         }
 
         /*
@@ -696,9 +725,14 @@ class Entrega {
          *
          */
         static int exercici3(int n, int d) {
-            return -1; // TO DO
+            //dado n el numero de fulles de un arbol y d el numero de hijos de los nodos interiores
+            //devuelve el numero total de vertices del arbol
+            int total = 0;
+            for (int i = 0; i < n; i++) {
+                total += (i + 1) * (d + 1);
+            }
+            return total;
         }
-
         /*
          * Donada una matriu d'adjacencia `A` d'un graf connex no dirigit, digau si el graf conté algún cicle.
          */
@@ -755,9 +789,9 @@ class Entrega {
      * Podeu aprofitar el mètode `assertThat` per comprovar fàcilment que un valor sigui `true`.
      */
     public static void main(String[] args) {
-        Tema1.tests();
-        Tema2.tests();
-        Tema3.tests();
+        //Tema1.tests();
+        //Tema2.tests();
+        //Tema3.tests();
         Tema4.tests();
     }
 
