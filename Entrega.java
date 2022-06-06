@@ -851,9 +851,9 @@ class Entrega {
      * Podeu aprofitar el mètode `assertThat` per comprovar fàcilment que un valor sigui `true`.
      */
     public static void main(String[] args) {
-        //Tema1.tests();
-        //Tema2.tests();
-        //Tema3.tests();
+        Tema1.tests();
+        Tema2.tests();
+        Tema3.tests();
         Tema4.tests();
     }
 
