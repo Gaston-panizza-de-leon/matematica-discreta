@@ -750,7 +750,55 @@ class Entrega {
         /*
          * Donada una matriu d'adjacencia `A` d'un graf connex no dirigit, digau si el graf conté algún cicle.
          */
+         private static class Node {
+
+            public int code;
+            public ArrayList <Integer> conected = new ArrayList();
+            private static int incre=0;
+            public boolean posibleCiclo;
+
+            public Node(int b[]) {
+                code = incre;
+                incre++;
+                for (int i = 0; i < b.length; i++) {
+                    if (b[i]==1) {
+                        conected.add(i);
+                    }
+                }
+            }        
+        }    
+        static boolean esCiclo(int codeIni, int codePre, Node nodo, Node[] nodos){
+            if (codeIni == nodo.code&&codeIni!=codePre) {
+                return true;
+            }
+            for (int i = 0; i < nodo.conected.size(); i++) {
+                if ((nodos[nodo.conected.get(i)].posibleCiclo)&&nodo.conected.get(i)!=codePre) {
+                    if(esCiclo(codeIni,nodo.code,nodos[nodo.conected.get(i)],nodos))
+                        return true;
+                }
+            }
+            return false;
+        }
         static boolean exercici4(int[][] A) {
+            Node nodos[] = new Node[A.length];
+            int count = 0;
+            for (int i = 0; i < A.length; i++) {
+                nodos[i] = new Node (A[i]);
+                if (nodos[i].conected.size()>1) {
+                    count++;
+                    nodos[i].posibleCiclo = true;
+                }
+            }
+            if (count==A.length) {
+                return true;              
+            }
+            for (int i = 0; i < A.length; i++) {
+                if(nodos[i].posibleCiclo){
+                if (esCiclo(nodos[i].code,nodos[i].code,nodos[i], nodos)) {
+                   return true;
+                }
+                }
+            }
             return false; // TO DO
         }
         /*
