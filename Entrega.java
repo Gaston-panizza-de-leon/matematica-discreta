@@ -1,7 +1,6 @@
 import java.lang.AssertionError;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 import java.util.function.BiPredicate;
 import java.util.function.Function;
 import java.util.function.IntPredicate;
@@ -264,17 +263,20 @@ class Entrega {
        * tant `a` com cada un dels elements de `p` està ordenat de menor a major.
        */
       static boolean exercici1(int[] a, int[][] p) {
-          Integer[] aInt = new Integer[a.length];
-          Arrays.setAll(aInt, k -> a[k]);
-          List<Integer> aList = Arrays.asList(aInt);
-          List<Integer> conjunt = new ArrayList<>();
-          for (int i=0; i<p.length; i++) {
-              for (int j=0; j<p[i].length; j++) {
-                  conjunt.add(p[i][j]);
+          int[] bool = new int [a.length];
+          for(int i=0;i<a.length;i++){
+              for(int []j:p){
+                  for(int k=0;k<j.length;k++){
+                      if(a[i]==j[k]){
+                          bool[i]+=1;
+                      }
+                  }
               }
           }
-          if (!conjunt.containsAll(aList)){
-              return false;
+          for(int i=0; i<bool.length;i++){
+              if(bool[i]!=1){
+                  return false;
+              }
           }
           return true;
       }
@@ -365,12 +367,13 @@ class Entrega {
        * que `y` pertany a `codom` i que tant `dom` com `codom` també estàn ordenats de menor a major.
        */
       static int[] exercici3(int[] dom, int[] codom, Function<Integer, Integer> f, int y) {
-          List<Integer> antiimagenes = new ArrayList<>();
+          ArrayList<Integer> antiimagenes = new ArrayList<>();
           for (int i=0; i<dom.length; i++) {
               if (f.apply(dom[i]) == y) {
                   antiimagenes.add(dom[i]);
               }
           }
+
 
           int[] arr = new int[antiimagenes.size()];
 
