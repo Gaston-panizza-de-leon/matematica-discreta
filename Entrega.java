@@ -75,7 +75,7 @@ class Entrega {
                     }
                 }
             }
-            return true; // TO DO
+            return true;
         }
 
         /*
@@ -102,7 +102,7 @@ class Entrega {
                 }
             }
             // Devuelve si el numero de casos que se cumplen es igual a 1.
-            return count == 1; // TO DO
+            return count == 1; //
         }
 
         /*
@@ -119,10 +119,10 @@ class Entrega {
             for (int i = 0; i < universe.length; i++) {
                 contiene = true;
                 x = universe[i];
-                for (int j = 0; j < universe.length; j++) { 
+                for (int j = 0; j < universe.length; j++) {
                     // Recorremos todo el universo.
                     y = universe[j];
-                    if (!contiene(x, y)) { 
+                    if (!contiene(x, y)) {
                         //Si no contiene alguno de los valores sale del for.
                         contiene = false;
                         break;
@@ -133,7 +133,7 @@ class Entrega {
                     return false;
                 }
             }
-            return true; // TO DO
+            return true;
         }
         /***
          * Este metodo compara dos conjuntos y devuelve si uno contiene al otro.
@@ -163,7 +163,7 @@ class Entrega {
          * És cert que ∀x. ∃!y. x·y ≡ 1 (mod n) ?
          */
         static boolean exercici4(int[] universe, int n) {
-            int x; 
+            int x;
             int y;
             int count = 0;
             for (int i = 0; i < universe.length; i++) {
@@ -190,7 +190,7 @@ class Entrega {
                 }
                 count = 0;
             }
-            return true; // TO DO
+            return true;
         }
 
         /*
@@ -289,6 +289,7 @@ class Entrega {
             int[] bool = new int[a.length];
             for (int i = 0; i < a.length; i++) {
                 for (int[] j : p) {
+                    //comprobamos que cada elemento de p pertenece al conjunto de elementos de a
                     for (int k = 0; k < j.length; k++) {
                         if (a[i] == j[k]) {
                             bool[i] += 1;
@@ -296,6 +297,7 @@ class Entrega {
                     }
                 }
             }
+            //si todos los elementos de a se encuentran en la partición p devolvemos true
             for (int i = 0; i < bool.length; i++) {
                 if (bool[i] != 1) {
                     return false;
@@ -433,9 +435,11 @@ class Entrega {
             int tipo1 = 1;
             int[] function = new int[dom.length];
             if (dom.length < codom.length) {
+                //guardamos todas las imagenes de f
                 for (int i = 0; i < dom.length; i++) {
                     function[i] = f.apply(dom[i]);
                 }
+                //comprobamos que todos los elementos del dominio tienen un elemento en el codominio
                 int checkrepeat = 0;
                 for (int i : function) {
                     injective = false;
@@ -617,7 +621,6 @@ class Entrega {
                     return exercici1(a, rest);
                 }
             }
-            // TO DO
         }
 
         /*
@@ -636,10 +639,10 @@ class Entrega {
          * Retornau l'invers sempre entre 1 i `n-1`, en cas que no existeixi retornau -1
          */
         static int exercici3(int a, int n) {
-            // calcula el inverso de a mod n
             boolean ExisteixInvers = false;
             int inverso = 0;
             for (int i = 1; i < n; i++) {
+                //combrobamos que a y n son coprimeros
                 if ((a * i) % n == 1) {
                     inverso = i;
                     ExisteixInvers = true;
@@ -691,11 +694,14 @@ class Entrega {
             int mida = 0;
             for (int i = 0; i < orden; i++) {
                 for (int j = 0; j < orden; j++) {
+                    //contamos la cantidad de aristas que conectan cada vertice
                     if (A[i][j] == 1 && A[j][i] == 1) {
                         mida++;
                     }
                 }
             }
+            //como en la matriz de adyacencia la información
+            // de las aristas está duplicada se divide entre 2
             mida = mida / 2;
             return new int[] { orden, mida };
 
@@ -710,6 +716,7 @@ class Entrega {
             int orden = A.length;
             int mida = 0;
             int[] grado = new int[orden];
+            //comprobamos el grado de cada vértice
             for (int i = 0; i < orden; i++) {
                 for (int j = 0; j < orden; j++) {
                     if (A[i][j] == 1) {
@@ -717,6 +724,8 @@ class Entrega {
                     }
                 }
             }
+            //si alguno de los grados de los vértices vértices
+            //no es par, devolvemos falso
             for (int i = 0; i < grado.length; i++) {
                 if (grado[i] % 2 != 0) {
                     euleriano = false;
@@ -735,11 +744,15 @@ class Entrega {
             int total = 0;
             double niveli = 0;
             int i;
+            //calculamos los niveles que tiene el arbol y la cantidad de nodos de cada uno
+            //hasta que el número de hojas del último nivel sea igual o mayor al número de hojas n
             for (i = 0; niveli <= n; i++) {
                 total += (int) niveli;
                 niveli = Math.pow(d, i);
             }
+            //en caso que las hojas del último nivel sea diferente a n
             if (Math.pow(d, i - 2) != n) {
+                //eliminamos el último nivel y añadimos hojas a cada nodo hasta tener n
                 double fullesNiveli = Math.pow(d, i - 2) - 1;
                 int nfullesSeg = 0;
                 while ((nfullesSeg + fullesNiveli) < n) {
@@ -758,7 +771,7 @@ class Entrega {
          * Donada una matriu d'adjacencia `A` d'un graf connex no dirigit, digau si el
          * graf conté algún cicle.
          */
-        
+
 
         static boolean exercici4(int[][] A) {
             Node nodos[] = new Node[A.length];
@@ -824,6 +837,31 @@ class Entrega {
             }
             return false;
         }
+
+        static boolean exercici4(int[][] A) {
+            Node nodos[] = new Node[A.length];
+            int count = 0;
+            for (int i = 0; i < A.length; i++) {
+                nodos[i] = new Node(A[i]);
+                if (nodos[i].conected.size() > 1) {
+                    count++;
+                    nodos[i].posibleCiclo = true;
+                }
+            }
+            if (count == A.length) {
+                return true;
+            }
+            for (int i = 0; i < A.length; i++) {
+                if (nodos[i].posibleCiclo) {
+                    if (esCiclo(nodos[i].code, nodos[i].code, nodos[i], nodos)) {
+                        return true;
+                    }
+                }
+            }
+            return false;
+        }
+
+        
         /*
          * Aquí teniu alguns exemples i proves relacionades amb aquests exercicis (vegeu
          * `main`)
