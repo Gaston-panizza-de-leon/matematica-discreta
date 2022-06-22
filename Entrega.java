@@ -27,7 +27,7 @@ import java.util.Set;
  * Podeu fer aquesta entrega en grups de com a màxim 3 persones, i necessitareu com a minim Java 8.
  * Per entregar, posau a continuació els vostres noms i entregau únicament aquest fitxer.
  * - Nom 1: Lucas Gastón Panizza De León
- * - Nom 2: Andreu Valerià
+ * - Nom 2: Andreu Valerià Marqués Goyes
  * - Nom 3:
  *
  * L'entrega es farà a través d'una tasca a l'Aula Digital abans de la data que se us hagui
@@ -687,7 +687,6 @@ class Entrega {
          * la mida del graf.
          */
         static int[] exercici1(int[][] A) {
-            // Dada una matriz de adyacencia A, devuelve el orden y el tamaño del grafo
             int orden = A.length;
             int mida = 0;
             for (int i = 0; i < orden; i++) {
@@ -707,7 +706,6 @@ class Entrega {
          * eulerià.
          */
         static boolean exercici2(int[][] A) {
-            // dada una matriz de adyacencia A, devuelve si el grafo es euleriano
             boolean euleriano = true;
             int orden = A.length;
             int mida = 0;
@@ -734,8 +732,6 @@ class Entrega {
          *
          */
         static int exercici3(int n, int d) {
-            // dado n el numero de fulles de un arbol y d el numero de hijos de los nodos
-            // interiores devuelve el numero total de vertices del arbol
             int total = 0;
             double niveli = 0;
             int i;
