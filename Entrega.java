@@ -65,11 +65,11 @@ class Entrega {
                 Predicate<Integer> q,
                 Predicate<Integer> r) {
             for (int i = 0; i < universe.length; i++) {
-                for (int j = 0; j < universe.length; j++) { 
+                for (int j = 0; j < universe.length; j++) {
                     // Recorremos todo el universo.
                     boolean a = p.test(universe[i], universe[j]);
                     boolean b = q.test(universe[i]) && r.test(universe[j]);
-                    if (a && !b) { 
+                    if (a && !b) {
                         // En el caso de que no se cumpla la implicación.
                         return false;
                     }
@@ -85,23 +85,23 @@ class Entrega {
             int count = 0;
             int x = 0;
             for (int i = 0; i < universe.length; i++) {
-                for (int j = 0; j < universe.length; j++) { 
+                for (int j = 0; j < universe.length; j++) {
                     // Recorremos todo el universo.
                     if (!(q.test(universe[j]) && !p.test(universe[i]))) {
-                        //En el caso de que se cumpla la implicación:
+                        // En el caso de que se cumpla la implicación:
                         if (count == 0) {
-                            //Si es la primera vez, se guarda la posición del elemento comprobado.
+                            // Si es la primera vez, se guarda la posición del elemento comprobado.
                             x = i;
                             count++;
                         }
                         if (x != i) {
-                            //Si es con otro elemento se sigue sumando.
+                            // Si es con otro elemento se sigue sumando.
                             count++;
                         }
                     }
                 }
             }
-            //Devuelve si el numero de casos que se cumplen es igual a 1.
+            // Devuelve si el numero de casos que se cumplen es igual a 1.
             return count == 1; // TO DO
         }
 
@@ -119,20 +119,27 @@ class Entrega {
             for (int i = 0; i < universe.length; i++) {
                 contiene = true;
                 x = universe[i];
-                for (int j = 0; j < universe.length; j++) {
+                for (int j = 0; j < universe.length; j++) { 
+                    // Recorremos todo el universo.
                     y = universe[j];
-                    if (!contiene(x, y)) {
+                    if (!contiene(x, y)) { 
+                        //Si no contiene alguno de los valores sale del for.
                         contiene = false;
                         break;
                     }
                 }
                 if (contiene) {
+                    //En el caso de que un conjunto contenga todos.
                     return false;
                 }
             }
             return true; // TO DO
         }
-
+        /***
+         * Este metodo compara dos conjuntos y devuelve si uno contiene al otro.
+         * @param x conjunto a contener al otro.
+         * @param y conjunto que tiene que estar contenido.
+         */
         static boolean contiene(int[] x, int[] y) {
             boolean contiene;
             if (y.length > x.length) {
