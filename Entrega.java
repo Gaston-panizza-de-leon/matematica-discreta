@@ -163,23 +163,29 @@ class Entrega {
          * És cert que ∀x. ∃!y. x·y ≡ 1 (mod n) ?
          */
         static boolean exercici4(int[] universe, int n) {
-            int x, y;
+            int x; 
+            int y;
             int count = 0;
             for (int i = 0; i < universe.length; i++) {
                 for (int j = 0; j < universe.length; j++) {
+                    // Recorremos todo el universo.
                     x = universe[i];
                     y = universe[j];
                     if ((x * y) % n == 1) {
+                        //Si se comple la condición:
                         if (count == 0) {
+                            //Y es la primera vez, suma una vez y guarda la posición.
                             y = i;
                             count++;
                         }
                         if (y != i) {
+                            //Si es diferente al valor guardado:
                             return false;
                         }
                     }
                 }
                 if (count != 1) {
+                    //Si la cantidad de soluciones es diferente a 1:
                     return false;
                 }
                 count = 0;
@@ -598,6 +604,7 @@ class Entrega {
             if (a > b) {
                 rest = a % b;
                 if (rest == 0) {
+                    //Hará recursion de él mismo hasta encontrar que el resto es 0.
                     return b;
                 } else {
                     return exercici1(b, rest);
@@ -619,6 +626,7 @@ class Entrega {
          * Podeu suposar que `a`, `b` i `c` són positius.
          */
         static boolean exercici2(int a, int b, int c) {
+            //l'exercici 1 retorna el mcd de a y b.
             return exercici1(a, b) % c == 0;
         }
 
@@ -754,8 +762,37 @@ class Entrega {
          * Donada una matriu d'adjacencia `A` d'un graf connex no dirigit, digau si el
          * graf conté algún cicle.
          */
-        private static class Node {
+        
 
+        static boolean exercici4(int[][] A) {
+            Node nodos[] = new Node[A.length];
+            int count = 0;
+            for (int i = 0; i < A.length; i++) {
+                //Recorremos la matriz adjunta.
+                nodos[i] = new Node(A[i]); //Enlazamos los nodos que estan unidos.
+                if (nodos[i].conected.size() > 1) {
+                    count++;
+                    nodos[i].posibleCiclo = true;
+                }
+            }
+            if (count == A.length) {
+                //Si todos los nodos tienen más de una conexión, será ciclo.
+                return true;
+            }
+            for (int i = 0; i < A.length; i++) {
+                if (nodos[i].posibleCiclo) {
+                    //Si hay posibilidad de que lo sea, se comprueba.
+                    if (esCiclo(nodos[i].code, nodos[i].code, nodos[i], nodos)) {
+                        return true;
+                    }
+                }
+            }
+            return false; // TO DO
+        }
+        /**
+         * Clase auxiliar para guardar los numeros a los que esta conectado un vértice.
+         */
+        private static class Node {
             public int code;
             public ArrayList<Integer> conected = new ArrayList();
             private static int incre = 0;
@@ -771,7 +808,14 @@ class Entrega {
                 }
             }
         }
-
+        /**
+         * Método que comprueba si hay posibilidad de ciclo y si hay ciclo.
+         * @param codeIni Nodo inicial.
+         * @param codePre Nodo anterior al actual.
+         * @param nodo Nodo actual.
+         * @param nodos Lista de Todos los nodos.
+         * @return
+         */
         static boolean esCiclo(int codeIni, int codePre, Node nodo, Node[] nodos) {
             if (codeIni == nodo.code && codeIni != codePre) {
                 return true;
@@ -784,30 +828,6 @@ class Entrega {
             }
             return false;
         }
-
-        static boolean exercici4(int[][] A) {
-            Node nodos[] = new Node[A.length];
-            int count = 0;
-            for (int i = 0; i < A.length; i++) {
-                nodos[i] = new Node(A[i]);
-                if (nodos[i].conected.size() > 1) {
-                    count++;
-                    nodos[i].posibleCiclo = true;
-                }
-            }
-            if (count == A.length) {
-                return true;
-            }
-            for (int i = 0; i < A.length; i++) {
-                if (nodos[i].posibleCiclo) {
-                    if (esCiclo(nodos[i].code, nodos[i].code, nodos[i], nodos)) {
-                        return true;
-                    }
-                }
-            }
-            return false; // TO DO
-        }
-
         /*
          * Aquí teniu alguns exemples i proves relacionades amb aquests exercicis (vegeu
          * `main`)
