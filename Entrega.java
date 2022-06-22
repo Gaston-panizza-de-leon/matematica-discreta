@@ -861,7 +861,7 @@ class Entrega {
             return false;
         }
 
-        
+
         /*
          * Aquí teniu alguns exemples i proves relacionades amb aquests exercicis (vegeu
          * `main`)
